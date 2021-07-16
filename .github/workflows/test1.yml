@@ -32,4 +32,4 @@ jobs:
       - name: Add comment
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-        run: gh issue comment ${{ github.event.inputs.issueNumber }} --body "${{ github.event.inputs.commentText }}"
+        run: gh issue comment ${{ github.event.inputs.issueNumber }} --body "${{ github.event.inputs.commentText }}" --repo GmodNET/github-app-test
