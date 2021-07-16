@@ -31,12 +31,15 @@ jobs:
              git config --global user.name "GmodNET GitHub Bot"
              git config --global user.email support@gmodnet.xyz
              
-      - name: Checkout
+      - name: Checkout repo
+        uses: actions/checkout@v2.3.4
+        with:
+          token: ${{ steps.generate_token.outputs.token }}
+        
+      - name: Checkout PR
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-        run: |
-             gh repo clone ${{ github.repository }} ./
-             gh pr checkout ${{ github.event.inputs.prNumber }}
+        run: gh pr checkout ${{ github.event.inputs.prNumber }}
              
       - name: Extract branch name
         uses: nelonoel/branch-name@v1.0.1
