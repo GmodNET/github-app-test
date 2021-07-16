@@ -35,7 +35,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
-             gh config set git_protocol ssh -h github.com
              gh repo clone ${{ github.repository }} ./
              gh pr checkout ${{ github.event.inputs.prNumber }}
              
@@ -45,6 +44,8 @@ jobs:
       - name: Rebase and push
         id: rebase_and_push
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
              git rebase ${BRANCH_NAME}
              git push --force
