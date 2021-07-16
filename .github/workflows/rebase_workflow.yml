@@ -25,11 +25,6 @@ jobs:
         with:
           app_id: ${{ secrets.GMODNET_GITHUB_BOT_ID }}
           private_key: ${{ secrets.GMODNET_GITHUB_BOT_KEY }}
-          
-      - name: Configere Git User information
-        run: |
-             git config --global user.name "GmodNET GitHub Bot"
-             git config --global user.email support@gmodnet.xyz
              
       - name: Checkout
         env:
