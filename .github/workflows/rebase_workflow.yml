@@ -35,7 +35,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
-             gh auth login
              gh repo clone ${{ github.repository }} ./
              gh pr checkout ${{ github.event.inputs.prNumber }}
              
@@ -49,6 +48,7 @@ jobs:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
              git rebase ${BRANCH_NAME}
+             git remote set-url origin https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/${{ github.repository }}.git
              git push --force
              
       - name: Notify if rebase was unsuccessful
